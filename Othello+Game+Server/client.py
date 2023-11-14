@@ -25,56 +25,76 @@ def evaluate_board(board, player, current_player, turn_num):
   
   # Weights for corner positions
   # Very important spaces as they create a stable piece
-  for i in [0, 7]:
-    for j in [0, 7]:
-      if board[i][j] == current_player:
-        score += pos_weights["corner_pos"]
+  if board[0][0] == current_player:
+    score += pos_weights["corner_pos"]
+  elif board[0][7] == current_player:
+    score += pos_weights["corner_pos"]
+  elif board[7][0] == current_player:
+    score += pos_weights["corner_pos"]
+  elif board[7][7] == current_player:
+    score += pos_weights["corner_pos"]
     
   # Weights for corner adjacent positions
   # Penalizes the current player since a corner piece can capitalize on this
-  for i in [0, 7]:
-    for j in [1, 6]:
-      if board[i][j] == current_player:
-        score -= pos_weights["corner_adj_pos"]
-  for i in [1, 6]:
-    for j in [0, 1, 6, 7]:
-      if board[i][j] == current_player:
-        score -= pos_weights["corner_adj_pos"]
+  if board[0][1] == current_player:
+    score -= pos_weights["corner_adj_pos"]
+  elif board[1][0] == current_player:
+    score -= pos_weights["corner_adj_pos"]
+  elif board[1][1] == current_player:
+    score -= pos_weights["corner_adj_pos"]
+  elif board[0][6] == current_player:
+    score -= pos_weights["corner_adj_pos"]
+  elif board[1][7] == current_player:
+    score -= pos_weights["corner_adj_pos"]
+  elif board[1][6] == current_player:
+    score -= pos_weights["corner_adj_pos"]
+  elif board[6][1] == current_player:
+    score -= pos_weights["corner_adj_pos"]
+  elif board[7][1] == current_player:
+    score -= pos_weights["corner_adj_pos"]
+  elif board[6][0] == current_player:
+    score -= pos_weights["corner_adj_pos"]
+  elif board[7][6] == current_player:
+    score -= pos_weights["corner_adj_pos"]
+  elif board[6][7] == current_player:
+    score -= pos_weights["corner_adj_pos"]
+  elif board[6][6] == current_player:
+    score -= pos_weights["corner_adj_pos"]
       
   # Weights for non-corner and non-corner-adjacent edge positions
   # Worth some points as these can create possible stable pieces
   # Hardcoded checks result in a more aggressive player for edge positions      
   if board[0][2] == current_player:
     score += pos_weights["edge_pos"]
-  if board[0][3] == current_player:
+  elif board[0][3] == current_player:
     score += pos_weights["edge_pos"]
-  if board[0][4] == current_player:
+  elif board[0][4] == current_player:
     score += pos_weights["edge_pos"]
-  if board[0][5] == current_player:
+  elif board[0][5] == current_player:
     score += pos_weights["edge_pos"]
-  if board[2][7] == current_player:
+  elif board[2][7] == current_player:
     score += pos_weights["edge_pos"]
-  if board[3][7] == current_player:
+  elif board[3][7] == current_player:
     score += pos_weights["edge_pos"]
-  if board[4][7] == current_player:
+  elif board[4][7] == current_player:
     score += pos_weights["edge_pos"]
-  if board[5][7] == current_player:
+  elif board[5][7] == current_player:
     score += pos_weights["edge_pos"]
-  if board[7][2] == current_player:
+  elif board[7][2] == current_player:
     score += pos_weights["edge_pos"]
-  if board[7][3] == current_player:
+  elif board[7][3] == current_player:
     score += pos_weights["edge_pos"]
-  if board[7][4] == current_player:
+  elif board[7][4] == current_player:
     score += pos_weights["edge_pos"]
-  if board[7][5] == current_player:
+  elif board[7][5] == current_player:
     score += pos_weights["edge_pos"]
-  if board[2][0] == current_player:
+  elif board[2][0] == current_player:
     score += pos_weights["edge_pos"]
-  if board[3][0] == current_player:
+  elif board[3][0] == current_player:
     score += pos_weights["edge_pos"]
-  if board[4][0] == current_player:
+  elif board[4][0] == current_player:
     score += pos_weights["edge_pos"]
-  if board[5][0] == current_player:
+  elif board[5][0] == current_player:
     score += pos_weights["edge_pos"]
     
   # Weights for start-of-game middle positions
@@ -187,6 +207,7 @@ def get_valid_moves(board, current_player):
       
 def get_move(board, player, turn_num):
   # Get the best move from minimax
+  # Feel free to change the depth!
   result = minimax(player, board, 6, player, turn_num, -math.inf, math.inf)
   print(f'Score: {result[1]}')
   return result[0]
