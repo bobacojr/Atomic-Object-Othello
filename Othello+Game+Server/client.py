@@ -34,11 +34,11 @@ def evaluate_board(board, player, current_player, turn_num):
   # Penalizes the current player since a corner piece can capitalize on this
   for i in [0, 7]:
     for j in [1, 6]:
-      if board[0][1] == current_player:
+      if board[i][j] == current_player:
         score -= pos_weights["corner_adj_pos"]
   for i in [1, 6]:
     for j in [0, 1, 6, 7]:
-      if board[0][1] == current_player:
+      if board[i][j] == current_player:
         score -= pos_weights["corner_adj_pos"]
       
   # Weights for non-corner and non-corner-adjacent edge positions
